@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/react.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>Portfolio JSM</title>
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>
+
+<style is:global>
+	@import url("https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,300;0,400;0,700;0,900;1,300;1,400;1,700;1,900&family=Sanchez:ital@0;1&display=swap");
+	@import url("https://fonts.googleapis.com/css2?family=Sanchez:ital@0;1&display=swap");
+
+	* {
+		padding: 0;
+		margin: 0;
+		box-sizing: border-box;
+		border: none;
+		user-select: none;
+		font-family: "Sanchez", serif;
+		font-weight: 400;
+		font-style: normal;
+	}
+	body {
+		background: linear-gradient(to bottom, #ffffff, #e0e0e0);
+	}
+	:root {
+		--co-black-1: #223d60;
+		--co-gray: #555;
+		--co-gray-2: #8a8a8a;
+		--co-gray-3 :rgba(0, 0, 0, 0.18);
+		--co-white: white;
+		--co-black :rgba(0, 0, 0, 0.664);
+	}
+	.merriweather-bold {
+		font-family: "Merriweather", serif;
+		font-weight: 700;
+		font-style: normal;
+	}
+
+</style>
+<script is:inline type="text/javascript"
+        src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js">
+</script>
+<script is:inline type="text/javascript">
+   (function(){
+      emailjs.init({
+        publicKey: "buhLCAturnnjkIk9A",
+      });
+   })();
+</script>
