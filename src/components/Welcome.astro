@@ -15,14 +15,16 @@
 		<h1 id="greet" class="merriweather-bold"></h1>
 		<h3 id="greet2">
 			En mi camino como desarrollador, he adquirido habilidades y una
-			variedad de tecnologías que me <br /> permiten llevar a cabo todo tipo
+			variedad de tecnologías que me permiten llevar a cabo todo tipo
 			de proyectos.
 		</h3>
 		<div id="cont-languages-know-to-use">
+			<h3 class="merriweather-bold">Mi stack tecnólogico</h3>
 			<div id="languages-container"></div>
 		</div>
 		<div id="div-proyects-and-donwload-cv">
 			<button id="btn-my-proyects"> mis proyectos → </button>
+			<button id="btn-my-studies" class="stack-tech">Estudios 📘 </button>
 			<h4 id="donwload-cv">DESCARGAR CV</h4>
 		</div>
 	</section>
@@ -48,13 +50,18 @@
 	</div>
 	<button id="next" class="styles-btn">{'>'}</button>
 	<button id="close-modal-projects">X</button>
-  </div>
-  
+</div>
+<div id="studies-modal" class="modal hidden">
+    <div class="modal-content  modal-content-studies">
+        <span id="close-studies-modal" class="close">X</span>
+        <div id="studies-container"></div>
+	</div>
+</div>
 </main>
 <script>
 	const iconGithub = document.getElementById('icon-github')	
 	const GREET =
-		"¡Hola! Soy Joel Saldarriaga Mera , Desarrollador Web Frontend.";
+		"¡Hola! Soy Joel Saldarriaga Mera, Desarrollador Web FullStack.";
 	const greetToDisplay = document.getElementById("greet");
 	let index = 0;
 
@@ -72,7 +79,9 @@
 		{ name: "CSS", src: "./css-3.png" },
 		{ name: "JavaScript", src: "./js.png" },
 		{ name: "C#", src: "./c-sharp.png" },
-		{ name: "Python", src: "./python.png" },
+		{ name: "Node Js", src: "./nodejs.png" },
+		{ name: "Vite", src: "./vite.png" },
+		// { name: "Python", src: "./python.png" },
 		{ name: "Git", src: "./git.png" },
 		{ name: "React", src: "./react.png" },
 		{ name: "Astro", src: "./astro.png" },
@@ -95,6 +104,7 @@
 	const themeIcon = document.getElementById("theme-icon");
 	const languageNames = document.querySelectorAll("#languages-container h6");
     const BTN_PROJECTS = document.getElementById('btn-my-proyects');
+	const BTN_STUDIES = document.getElementById('btn-my-studies');
 	
 	let isDarkMode = false;
 
@@ -327,7 +337,91 @@ const displayProject = () => {
     
 };
 
+const ESTUDIOS = [
+{
+    title: "Ingeniería en Ciencias de la Computación",
+    institution: "ESPAM MFL - Escuela Superior Politécnica Agropecuaria de Manabí Manuel Félix López",
+    period: "2022 - Actualidad (Previsión de graduación: 2027)",
+    link: "https://www.espam.edu.ec/",
+    description: `
+    Programa académico de excelencia en Ingeniería en Ciencias de la Computación avalado por la ESPAM MFL, 
+    donde he adquirido competencias estratégicas en desarrollo de sistemas complejos 
+    a través de su enfoque en:
+    
+      Diseño de Software y Patrones Arquitectónicos
+    • FullStack Development con énfasis en el stack institucional (JavaScript, C#, .NET)
+    • Gestión de datos con tecnologías enseñadas en laboratorios ESPAM: 
+      MySQL (Base de Datos II)
+	• Desarrollo de aplicaciones móviles y web con tecnologías como Angular js.
+    
+    Actualmente aplicando estos conocimientos desarrollando proyectos personales.
+`,
+    achievements: [
+        "Beca de excelencia académica 2024-2025",
+    ],
+    skillsLearned: [
+        "Diseño de APIs RESTful",
+		"Desarrollo de Aplicaciones Web Progresivas (PWA)",
+		"Integración de servicios en la nube (Firebase)",
+		"Frameworks de JavaScript (React, Angular js)",
+		"Desarrollo de aplicaciones móviles con React Native",
+		"Desarrollo de chatbots con IA",
+		"Optimización de rendimiento web con técnicas de lazy loading",
+        // "Patrones de diseño software"
+    ]
+},
+];
+let indexEstudio = 0;
+function displayEstudies() {
+    const modal = document.getElementById('studies-modal');
+    const container = document.getElementById('studies-container');
+    const estudy = ESTUDIOS[indexEstudio];
+	container.innerHTML = `
+    <div class="study-header">
+        <h3 class="merriweather-bold">${estudy.title}</h3>
+        <span class="study-period">${estudy.period}</span>
+    </div>
+    
+    <div class="study-institution">
+        <img src="/espam.png" alt="Institución" width="70">
+        <div>
+            <h4 class="institution">${estudy.institution}</h4>
+            ${estudy.link ? `<a href="${estudy.link}" target="_blank" style="font-size:0.9rem;color:var(--co-gray)">Visitar sitio oficial</a>` : ''}
+        </div>
+    </div>
+
+    <div class="study-details">
+        <p class="study-description">${estudy.description}</p>
+    </div>
+	${estudy.achievements?.length ? `
+        <div class="study-achievements">
+            <h4>Logros académicos</h4>
+            <ul class="achievements-list">
+                ${estudy.achievements.map(achievement => `
+                <li>${achievement}</li>`).join('')}
+            </ul>
+        </div>` : ''}
+
+        ${estudy.skillsLearned?.length ? `
+        <div class="skills-learned">
+            <h4>Competencias técnicas</h4>
+            <div class="skills-container">
+                ${estudy.skillsLearned.map(skill => `
+                <div class="skill-item">${skill}</div>`).join('')}
+            </div>
+        </div>` : ''}
+    `;
+    modal.classList.remove('hidden');
+    modal.classList.add('show');
+}
+
+document.getElementById('close-studies-modal')?.addEventListener('click', () => {
+    document.getElementById('studies-modal').classList.remove('show');
+    document.getElementById('studies-modal').classList.add('hidden');
+});
+
 BTN_PROJECTS?.addEventListener('click', displayProject);
+BTN_STUDIES?.addEventListener('click',displayEstudies);
 
 const previous = document.getElementById('previus');
 const next = document.getElementById('next');
@@ -383,6 +477,7 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 	h1 {
 		font-size: 2.4rem;
 		font-weight: bold;
+		width: 60%;
 		background: linear-gradient(90deg, var(--co-black-1), #2d3bff, #cf1512);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
@@ -402,13 +497,14 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 	}
 	#greet2 {
 		color: var(--co-gray);
+		width: 50%;
+		text-align: justify;
 		text-shadow: 0 1.5px 1px var(--co-gray-3);
 		line-height: 1.6;
 	}
 	#btn-my-proyects {
 		cursor: pointer;
-		width: 150px;
-		height: 35px;
+		padding: 0.5rem 1.5rem;
 		box-shadow: 0 6px 15px -5px var(--co-gray-3);
 		border: 1px solid var(--co-gray-2);
 		background-color: var(--co-white);
@@ -444,6 +540,7 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 		width: 43%;
 		flex-direction: column;
 		gap: .5rem;
+		color: var(--co-black-1);
 		align-items: center;
 	}
 	#languages-container {
@@ -451,6 +548,7 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 		align-items: center;
 		justify-content: space-between;
 		padding: 0.3rem 0;
+		margin-top: .75rem;
 	}
 	#div-proyects-and-donwload-cv {
 		width: 45%;
@@ -470,6 +568,9 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 		-webkit-text-fill-color: transparent;
 		color: var(--co-black-1);
 		transition: 0.5s ease;
+	}
+	.cont-languages-know-to-use h3 {
+		margin-bottom: .5rem;
 	}
 	.modal {
 		position: fixed;
@@ -579,7 +680,18 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 	gap:.5rem ;
 	justify-content: space-between;
 }
-
+.stack-tech {
+	border: 1px solid var(--co-black-1);
+	padding: .5rem 1.5rem;
+	cursor:pointer;
+	border-radius: 7px;
+	color: var(--co-black-1);
+}
+.stack-tech:hover {
+	background-color: var(--co-black-1);
+	color: var(--co-white);
+	transition: .5s ease;
+}
 .styles-btn {
 	font-size: 2rem;
 	color: var(--co-gray-2);
@@ -602,14 +714,160 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 	background-color: var(--co-white);
 	color: var(--co-gray-2);
 }
+#studies-container {
+	display: flex;
+	flex-direction: column;
+	gap: 1.5rem;
+}
 #close-modal-projects:hover {
 	color:red;
 }
+.modal-content-studies {
+	width: 90%;
+	height: 90vh;
+	overflow-y: auto;
+}
+.study-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    border-bottom: 2px solid var(--co-black-1);
+    padding-bottom: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.study-header h3 {
+    font-size: 1.8rem;
+    color: var(--co-black-1);
+    margin: 0;
+}
+
+.study-period {
+    font-size: 0.9rem;
+    color: var(--co-gray);
+    font-weight: 500;
+}
+
+.study-institution {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1.5rem;
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.study-institution img {
+    filter: grayscale(100%);
+    opacity: 0.8;
+}
+
+.study-details {
+    text-align: left;
+    line-height: 1.7;
+}
+
+.study-description {
+    color: var(--co-gray-2);
+    margin-bottom: 2rem;
+    white-space: pre-line;
+}
+
+.relevant-courses h4,
+.study-achievements h4,
+.skills-learned h4 {
+    color: var(--co-black-1);
+    font-size: 1.1rem;
+    margin: 1.5rem 0 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.relevant-courses ul {
+    list-style: none;
+    padding-left: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.8rem;
+}
+
+.relevant-courses li {
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.relevant-courses li::before {
+    content: "▹";
+    position: absolute;
+    left: 0;
+    color: var(--co-black-1);
+}
+
+.achievements-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.achievements-list li {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    padding: 0.8rem;
+    margin-bottom: 0.8rem;
+    background: #fff8e1;
+    border-radius: 6px;
+}
+
+.achievements-list li::before {
+    content: "★";
+    color: #ffc107;
+}
+
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+}
+
+.skill-item {
+    background: var(--co-black-1);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+}
+
+.certificate-link a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-top: 2rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--co-black-1);
+    color: white;
+    border-radius: 6px;
+    text-decoration: none;
+    transition: transform 0.2s ease;
+}
+
+.certificate-link a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 12px rgba(0,0,0,0.1);
+}
+
+.modal-content-studies {
+    max-width: 800px;
+    padding: 2.5rem;
+    text-align: left;
+}
+
 @media screen and (max-width:768px) {
 	#sect-greet {
 		padding: 1rem;
 	}
 	h1 {
+		width: 100%;
 		font-size:2.3rem;
 		line-height: 1.4;
 	}
@@ -629,6 +887,12 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 	#close-modal-projects {
 		right:8%;
 		top:11%;
+	}
+	#btn-my-proyects {
+		padding:0 0.5rem ;
+	}
+	#greet2 {
+		width: 100%;
 	}
 }
 </style>
