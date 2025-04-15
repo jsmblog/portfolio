@@ -1,7 +1,8 @@
 <main>
 	<section id="sect-greet">
 		<div id="sect-contact-and-dm">
-			<a href="https://github.com/jsmblog/" target="_blank" rel="noopener noreferrer"><img id="icon-github" src="./github.png" width="27" alt="" /></a>
+			<a href="https://www.linkedin.com/in/jefferson-mera-8194a8360?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer"><img id="icon-github" src="./linkedin.png" width="21" alt="" /></a>
+			<a href="https://github.com/jsmblog/" target="_blank" rel="noopener noreferrer"><img id="icon-github" src="./github.png" width="22" alt="" /></a>
 			<button id="btn-contact-me"> contáctame </button>
 			<button id="toggle-theme-btn">
 				<img
@@ -19,7 +20,7 @@
 			de proyectos.
 		</h3>
 		<div id="cont-languages-know-to-use">
-			<h3 class="merriweather-bold">Mi stack tecnólogico</h3>
+			<h4 class="merriweather-bold">Mi stack tecnólogico</h4>
 			<div id="languages-container"></div>
 		</div>
 		<div id="div-proyects-and-donwload-cv">
@@ -59,7 +60,7 @@
 </div>
 </main>
 <script>
-	const iconGithub = document.getElementById('icon-github')	
+	const iconGithub = document.querySelectorAll('#icon-github')	
 	const GREET =
 		"¡Hola! Soy Joel Saldarriaga Mera, Desarrollador Web FullStack.";
 	const greetToDisplay = document.getElementById("greet");
@@ -114,7 +115,9 @@
 			: "linear-gradient(to bottom, #092635, #020d16)";
 
 		themeIcon.src = isDarkMode ? "./moonBlue.png" : "./sun.png";
-        iconGithub.style.filter = !isDarkMode ? 'brightness(0) invert(1)' : ''
+        iconGithub.forEach((icon) => {
+			icon.style.filter = !isDarkMode ? 'brightness(0) invert(1)' : ''
+		});
 		greetToDisplay.style.background = !isDarkMode
 			? "linear-gradient(to bottom, #333, white)"
 			: "linear-gradient(90deg, var(--co-black-1), #2d3bff, #cf1512)";
@@ -131,8 +134,8 @@
 	const downloadCV = document.getElementById("donwload-cv");
 	downloadCV.addEventListener("click", () => {
 		const link = document.createElement("a");
-		link.href = "./Cv-JoelSm.pdf"; // Ruta al archivo en la carpeta public
-		link.download = "Cv-JoelSm.pdf";
+		link.href = "./cv-jefferson-saldarriaga.pdf"; 
+		link.download = "cv-jefferson-saldarriaga.pdf";
 		link.click();
 	});
 
@@ -383,7 +386,7 @@ function displayEstudies() {
     </div>
     
     <div class="study-institution">
-        <img src="/espam.png" alt="Institución" width="70">
+        <img src="/espam.png" alt="Institución" width="60">
         <div>
             <h4 class="institution">${estudy.institution}</h4>
             ${estudy.link ? `<a href="${estudy.link}" target="_blank" style="font-size:0.9rem;color:var(--co-gray)">Visitar sitio oficial</a>` : ''}
@@ -525,7 +528,7 @@ document.getElementById("contact-form").addEventListener("submit", (event) => {
 		gap: 0.9rem;
 		padding: 0 1rem;
 	}
-	#sect-contact-and-dm button:nth-child(2) {
+	#sect-contact-and-dm button:nth-child(3) {
 		padding: 0.5rem;
 		cursor: pointer;
 		border-radius: 20px;
